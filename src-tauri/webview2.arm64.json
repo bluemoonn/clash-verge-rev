@@ -25,10 +25,10 @@
       "active": true,
       "dialog": false,
       "endpoints": [
-        "https://download.clashverge.dev/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/updater/update-fixed-webview2-proxy.json",
-        "https://github.com/clash-verge-rev/clash-verge-rev/releases/download/updater/update-fixed-webview2.json"
+        "https://gh-proxy.com/https://github.com/bluemoonn/clash-verge-rev-cp/releases/download/updater/update-fixed-webview2-proxy.json",
+        "https://github.com/bluemoonn/clash-verge-rev-cp/releases/download/updater/update-fixed-webview2.json"
       ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQyOEMyRjBCQkVGOUJEREYKUldUZnZmbStDeStNMHU5Mmo1N24xQXZwSVRYbXA2NUpzZE5oVzlqeS9Bc0t6RVV4MmtwVjBZaHgK"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQ3RUIxQ0IzQTEzMTMyRjYKUldUMk1qR2hzeHpyMTE0ZkVVZ2pvWjl1ZHNKcjg2WTgxMVc1ZEg3dVdDRmNCMTdIaTFIVWR0RCsK"
     }
   }
 }
