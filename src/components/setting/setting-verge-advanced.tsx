@@ -9,8 +9,6 @@ import {
   openDevTools,
   exportDiagnosticInfo,
 } from "@/services/cmds";
-import { check as checkUpdate } from "@tauri-apps/plugin-updater";
-import { useVerge } from "@/hooks/use-verge";
 import { version } from "@root/package.json";
 import { DialogRef } from "@/components/base";
 import { SettingList, SettingItem } from "./mods/setting-comp";
@@ -19,7 +17,6 @@ import { HotkeyViewer } from "./mods/hotkey-viewer";
 import { MiscViewer } from "./mods/misc-viewer";
 import { ThemeViewer } from "./mods/theme-viewer";
 import { LayoutViewer } from "./mods/layout-viewer";
-import { UpdateViewer } from "./mods/update-viewer";
 import { BackupViewer } from "./mods/backup-viewer";
 import { LiteModeViewer } from "./mods/lite-mode-viewer";
 import { TooltipIcon } from "@/components/base/base-tooltip-icon";
@@ -33,28 +30,13 @@ interface Props {
 const SettingVergeAdvanced = ({ onError }: Props) => {
   const { t } = useTranslation();
 
-  const { verge, patchVerge, mutateVerge } = useVerge();
   const configRef = useRef<DialogRef>(null);
   const hotkeyRef = useRef<DialogRef>(null);
   const miscRef = useRef<DialogRef>(null);
   const themeRef = useRef<DialogRef>(null);
   const layoutRef = useRef<DialogRef>(null);
-  const updateRef = useRef<DialogRef>(null);
   const backupRef = useRef<DialogRef>(null);
   const liteModeRef = useRef<DialogRef>(null);
-
-  const onCheckUpdate = async () => {
-    try {
-      const info = await checkUpdate();
-      if (!info?.available) {
-        showNotice("success", t("Currently on the Latest Version"));
-      } else {
-        updateRef.current?.open();
-      }
-    } catch (err: any) {
-      showNotice("error", err.message || err.toString());
-    }
-  };
 
   const onExportDiagnosticInfo = useCallback(async () => {
     await exportDiagnosticInfo();
@@ -68,7 +50,6 @@ const SettingVergeAdvanced = ({ onError }: Props) => {
       <HotkeyViewer ref={hotkeyRef} />
       <MiscViewer ref={miscRef} />
       <LayoutViewer ref={layoutRef} />
-      <UpdateViewer ref={updateRef} />
       <BackupViewer ref={backupRef} />
       <LiteModeViewer ref={liteModeRef} />
 
@@ -102,8 +83,6 @@ const SettingVergeAdvanced = ({ onError }: Props) => {
       <SettingItem onClick={openCoreDir} label={t("Open Core Dir")} />
 
       <SettingItem onClick={openLogsDir} label={t("Open Logs Dir")} />
-
-      <SettingItem onClick={onCheckUpdate} label={t("Check for Updates")} />
 
       <SettingItem onClick={openDevTools} label={t("Open Dev Tools")} />
 
