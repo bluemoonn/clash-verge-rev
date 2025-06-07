@@ -18,7 +18,7 @@ export const UpdateButton = (props: Props) => {
   const viewerRef = useRef<DialogRef>(null);
 
   const { data: updateInfo } = useSWR(
-    auto_check_update || auto_check_update === null ? "checkUpdate" : null,
+    auto_check_update ? "checkUpdate" : null,
     check,
     {
       errorRetryCount: 2,

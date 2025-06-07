@@ -23,8 +23,6 @@ import { useNavigate } from "react-router-dom";
 import { version as appVersion } from "@root/package.json";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { check as checkUpdate } from "@tauri-apps/plugin-updater";
-import { useLockFn } from "ahooks";
-import { showNotice } from "@/services/noticeService";
 import { useSystemState } from "@/hooks/use-system-state";
 import { useServiceInstaller } from "@/hooks/useServiceInstaller";
 
@@ -136,21 +134,6 @@ export const SystemInfoCard = () => {
       installServiceAndRestartCore();
     }
   }, [isSidecarMode, isAdminMode, installServiceAndRestartCore]);
-
-  // 检查更新
-  const onCheckUpdate = useLockFn(async () => {
-    try {
-      const info = await checkUpdate();
-      if (!info?.available) {
-        showNotice("success", t("Currently on the Latest Version"));
-      } else {
-        showNotice("info", t("Update Available"), 2000);
-        goToSettings();
-      }
-    } catch (err: any) {
-      showNotice("error", err.message || err.toString());
-    }
-  });
 
   // 是否启用自启动
   const autoLaunchEnabled = useMemo(
@@ -299,24 +282,6 @@ export const SystemInfoCard = () => {
           >
             {getModeIcon()}
             {getModeText()}
-          </Typography>
-        </Stack>
-        <Divider />
-        <Stack direction="row" justifyContent="space-between">
-          <Typography variant="body2" color="text.secondary">
-            {t("Last Check Update")}
-          </Typography>
-          <Typography
-            variant="body2"
-            fontWeight="medium"
-            onClick={onCheckUpdate}
-            sx={{
-              cursor: "pointer",
-              textDecoration: "underline",
-              "&:hover": { opacity: 0.7 },
-            }}
-          >
-            {systemState.lastCheckUpdate}
           </Typography>
         </Stack>
         <Divider />
